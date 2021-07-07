@@ -60,3 +60,4 @@ typings/
 # Hubot stuff
 .DS_Store*
 .hubot_history
+scripts/example.js

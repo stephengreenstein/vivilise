@@ -12,41 +12,52 @@
 
 module.exports = (robot) => {
 
-  // robot.hear(/badger/i, (res) => {
-  //   res.send('Badgers? BADGERS? WE DON’T NEED NO STINKIN BADGERS')
-  // })
+  robot.hear(/poop/i, (res) => {
+     res.send('Poop? I do not poop, I just pee!')
+   })
+  
+  robot.respond(/open the (.*) doors/i, (res) => {
+    const doorType = res.match[1]
+  
+    if (doorType === 'pod bay') {
+      res.reply('I’m afraid I can’t let you do that.')
+      return
+    }
+  
+    res.reply('Opening #{doorType} doors')
+  })
+  robot.respond(/Hi Hubot! My name is (.*)/i, function(msg) {
+    let name;
+    name = msg.match[1];
+    if (name == "Hubot"){
+      return msg.send("You're not Hubot--I'm Hubot!");
+    } else {
+      return msg.reply("Nice to meet you, " + name + "!");
+    }
+  
+  });
+
   //
-  // robot.respond(/open the (.*) doors/i, (res) => {
-  //   const doorType = res.match[1]
-  //
-  //   if (doorType === 'pod bay') {
-  //     res.reply('I’m afraid I can’t let you do that.')
-  //     return
-  //   }
-  //
-  //   res.reply('Opening #{doorType} doors')
-  // })
-  //
-  // robot.hear(/I like pie/i, (res) => {
-  //   res.emote('makes a freshly baked pie')
-  // })
-  //
-  // const lulz = ['lol', 'rofl', 'lmao']
-  //
-  // robot.respond(`/${lulz.join('|')}/i`, (res) => {
-  //   res.send(res.random(lulz))
-  // })
-  //
-  // robot.topic((res) => {
-  //   res.send(`${res.message.text}? That’s a Paddlin`)
-  // })
-  //
-  // const enterReplies = ['Hi', 'Target Acquired', 'Firing', 'Hello friend.', 'Gotcha', 'I see you']
-  // const leaveReplies = ['Are you still there?', 'Target lost', 'Searching']
-  //
-  // robot.enter((res) => {
-  //   res.send(res.random(enterReplies))
-  // })
+  //robot.hear(/I like pie/i, (res) => {
+  //  res.emote('That is nice, but I do not care')
+  //})
+  
+  const lulz = ['lol', 'rofl', 'lmao']
+  
+  robot.respond(`/${lulz.join('|')}/i`, (res) => {
+    res.send(res.random(lulz))
+  })
+  
+  robot.topic((res) => {
+    res.send(`${res.message.text}? That’s a Paddlin`)
+  })
+  
+const enterReplies = ['Hi', 'Target Acquired', 'Firing', 'Hello friend.', 'Gotcha', 'I see you']
+const leaveReplies = ['Are you still there?', 'Target lost', 'Searching']
+
+robot.enter((res) => {
+ res.send(res.random(enterReplies))
+})
   // robot.leave((res) => {
   //   res.send(res.random(leaveReplies))
   // })
